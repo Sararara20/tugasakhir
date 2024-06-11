@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="encryption.js"></script>
     <script>
         (function(){
             emailjs.init("UPW5uwqlPRxZabjz7"); // Ganti dengan User ID EmailJS Anda
@@ -20,7 +22,7 @@
         <a href="index.html">About Us</a>
         <a href="sales.html">Sales</a>
         <a href="produk.html">Product</a>
-        <a href="suggestion.html">Sugesstion</a>
+        <a href="suggestion.html">sugesstion</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
@@ -76,6 +78,16 @@
 
     document.getElementById('suggestionForm').addEventListener('submit', function(event) {
         event.preventDefault();
+
+        var formData = {
+            nama: document.getElementById('nama').value,
+            email: document.getElementById('email').value,
+            comment: document.getElementById('comment').value
+        };
+
+        // Enkripsi data sebelum mengirim
+        var encryptedData = encryptData(formData);
+
 
         emailjs.sendForm('service_k4a1cyp', 'template_yp3y8yv', this)
             .then(function() {
